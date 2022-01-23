@@ -1,9 +1,8 @@
 package com.lexamenrf44;
 
 import com.codeborne.selenide.Condition;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
@@ -11,13 +10,15 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.openqa.selenium.By.linkText;
 import static org.openqa.selenium.By.partialLinkText;
 
-@DisplayName("Parameterized tests class")
-public class ParameterizedGitHubSearchTests {
+public class CsvSourceParameterizedGitHubSearchTests {
 
-    @ValueSource(strings = {"eroshenkoam/allure-example"})
-    @ParameterizedTest
-    @DisplayName("Searching gitHub issues")
-    public void issueSearchTest(String testData) {
+
+    @CsvSource(value = {
+            "eroshenkoam/allure-example, #68",
+            "selenide/selenide, #1687"
+    })
+    @ParameterizedTest(name = "Тестирование общего алгоритма поиска репозиториев разных автором с тестовыми данными: {0}")
+    public void selenideGitHubSearchTest(String testData, String expectedResult) {
 
         open("https://github.com");
 
@@ -27,7 +28,7 @@ public class ParameterizedGitHubSearchTests {
 
         $(linkText(testData)).click();
         $(partialLinkText("Issues")).click();
-        $(withText("#68")).should(Condition.visible);
+        $(withText(expectedResult)).should(Condition.visible);
 
     }
 
