@@ -15,7 +15,7 @@ import static org.openqa.selenium.By.partialLinkText;
 
 public class MethodSourceParameterizedGitHubSearchTests {
 
-    static Stream<Arguments> selenideGitHubSearchTestDataProvider () {
+    static Stream<Arguments> selenideGitHubSearchTestDataProvider() {
         return Stream.of(
                 Arguments.of("eroshenkoam/allure-example", "#68"),
                 Arguments.of("selenide/selenide", "#1687")

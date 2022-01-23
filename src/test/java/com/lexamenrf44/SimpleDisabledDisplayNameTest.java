@@ -11,7 +11,7 @@ public class SimpleDisabledDisplayNameTest {
 
     @Test
     @DisplayName("Тестирование 3 > 2")
-    public void test () {
+    public void test() {
         Assertions.assertTrue(3 > 2);
 
     }
